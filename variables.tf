@@ -18,7 +18,7 @@ variable "cpu_utilization_threshold" {
 variable "cpu_credit_balance_threshold" {
   description = "The minimum number of CPU credits (t2 instances only) available."
   type        = string
-  default     = 20
+  default     = 0
 }
 
 variable "disk_queue_depth_threshold" {
