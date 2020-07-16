@@ -1,3 +1,9 @@
+variable "rds_alert_prefix" {
+  type = string
+  default = ""
+  description = "String to prefix CloudWatch alerts with to avoid naming collisions"
+}
+
 variable "db_instance_id" {
   description = "The instance ID of the RDS database instance that you want to monitor."
   type        = string
