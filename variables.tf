@@ -61,3 +61,9 @@ variable "swap_usage_threshold" {
   # 256 Megabyte in Byte
 }
 
+variable "enabled" {
+  description = "Set to false to prevent the module from creating any resources"
+  type        = bool
+  default     = true
+  # 256 Megabyte in Byte
+}

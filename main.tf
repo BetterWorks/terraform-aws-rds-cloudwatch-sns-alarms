@@ -10,12 +10,14 @@ data "aws_caller_identity" "default" {
 
 # Make a topic
 resource "aws_sns_topic" "default" {
+  count       = var.enabled ? 1 : 0
   name_prefix = "rds-threshold-alerts"
 }
 
 resource "aws_db_event_subscription" "default" {
+  count       = var.enabled ? 1 : 0
   name_prefix = "rds-event-sub"
-  sns_topic   = aws_sns_topic.default.arn
+  sns_topic   = aws_sns_topic.default[0].arn
 
   source_type = "db-instance"
   source_ids  = [var.db_instance_id]
@@ -33,7 +35,8 @@ resource "aws_db_event_subscription" "default" {
 }
 
 resource "aws_sns_topic_policy" "default" {
-  arn    = aws_sns_topic.default.arn
+  count  = var.enabled ? 1 : 0
+  arn    = aws_sns_topic.default[0].arn
   policy = data.aws_iam_policy_document.sns_topic_policy.json
 }
 
