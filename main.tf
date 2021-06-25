@@ -37,10 +37,11 @@ resource "aws_db_event_subscription" "default" {
 resource "aws_sns_topic_policy" "default" {
   count  = var.enabled ? 1 : 0
   arn    = aws_sns_topic.default[0].arn
-  policy = data.aws_iam_policy_document.sns_topic_policy.json
+  policy = data.aws_iam_policy_document.sns_topic_policy[0].json
 }
 
 data "aws_iam_policy_document" "sns_topic_policy" {
+  count  = var.enabled ? 1 : 0
   policy_id = "__default_policy_ID"
 
   statement {
